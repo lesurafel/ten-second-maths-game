@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="js/tenSecondGame.js"></script>
+
+    <link href="CSS/bootstrap.min.css" rel="stylesheet">
+    <link href="CSS/tenSecondGame.css" rel="stylesheet">
+  </head>
+  <body>
+    <div class="container">
+      <div id="content-holder">
+        <div id="showScore">
+          <p>Current Score: <span id='currentScore'>0</span></p>
+          <p>High Score: <span id='highScore'>0</span></p>
+        </div>
+        <div id="operators-container">
+          <ul class="operators">
+            <li><label><input type="checkbox" checked="checked" value="+"> + <span id="text-op-add">Addition</span></label></li>
+            <li><label><input type="checkbox" value="-"> - <span id="text-op-sub">Subtraction</span></label></li>
+          </ul>
+          <ul class="operators">
+            <li><label><input type="checkbox" value="*"> &times; <span id="text-op-mul">Multiplication</span></label></li>
+            <li><label><input type="checkbox" value="/"> &divide; <span id="text-op-div">Division</span></label></li>
+          </ul>
+        </div>
+        <div id="sliderContainer">
+          <p>Number Limite: <span id="numLimite">10</span></p>
+          <input type="range" min="10" max="50" value="10"  step="5" id="number-limit" class="slider">
+        </div>
+        <div id="claculator">
+          <div class="time-box">
+            <p id="time-left">10</p>
+            <p id="time-left-text">Seconds left</p>
+          </div>
+          <p><span class="first-num">8 </span><span class='oprator'> + </span><span class="second-num"> 9</span></p>
+          <input type="text" id="answer" name="newList" placeholder="your answer">
+        </div>
+      </div> <!-- End of Content holder -->
+    </div> <!-- End of Container -->
+  </body>
+</html>
