@@ -36,7 +36,6 @@ var calculateTwoNum = function() {
       return (Number(firstNum.innerHTML) * Number(secondNum.innerHTML) === answer);
       break;
     default:
-    console.log(Math.round(Number(firstNum.innerHTML) / Number(secondNum.innerHTML)*10) / 10);
       return (Math.round(Number(firstNum.innerHTML) / Number(secondNum.innerHTML)*10) / 10 === answer);
   }
 }
@@ -53,10 +52,6 @@ $(document).ready(function(){
     event.stopPropagation();
     var limiteNum = document.getElementById("numLimite")
     limiteNum.innerHTML = this.value;
-
-    /*var x = this.value;
-    var color = 'linear-gradient(90deg, rgb(76, 209, 55)' + x + '%, rgb(39, 60, 117)' + x + '%)';
-    this.style.background = color;*/
   });
 
   $(document).on('click', 'li', function (event) {
