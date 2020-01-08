@@ -36,7 +36,6 @@ var calculateTwoNum = function() {
       return (Number(firstNum.innerHTML) * Number(secondNum.innerHTML) === answer);
       break;
     default:
-    console.log(Math.round(Number(firstNum.innerHTML) / Number(secondNum.innerHTML)*10) / 10);
       return (Math.round(Number(firstNum.innerHTML) / Number(secondNum.innerHTML)*10) / 10 === answer);
   }
 }
