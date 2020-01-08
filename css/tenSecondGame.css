@@ -60,3 +60,7 @@ ul {
   -webkit-transition: 0.2s;
   transition: opacity 0.2s;
 }
+
+.slider:hover {
+  opacity: 1;
+}

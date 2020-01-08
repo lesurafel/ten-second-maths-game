@@ -52,10 +52,6 @@ $(document).ready(function(){
     event.stopPropagation();
     var limiteNum = document.getElementById("numLimite")
     limiteNum.innerHTML = this.value;
-
-    var x = this.value;
-    var color = 'linear-gradient(90deg, rgb(53, 59, 72)' + x + '%, rgb(53, 59, 72)' + x + '%)';
-    this.background = color;
   });
 
   $(document).on('click', 'li', function (event) {
