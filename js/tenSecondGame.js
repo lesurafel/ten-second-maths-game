@@ -15,19 +15,28 @@ var assignNumber = function () {
   var secondNum = document.getElementById("secondNum");
   var operator = document.getElementById("operator");
 
-  firstNum.innerHTML = num1;
-  secondNum.innerHTML = num2;
   if (operatorList.length !== 0) {
     operator.innerHTML = operatorList[operatorIndex - 1];
   }
 
+  if (operator.innerHTML === '-') {
+    if (num1 < num2) {
+      var temp = num2;
+      num2 = num1;
+      num1 = temp;
+    }
+  } else if (operator.innerHTML === '/') {
+    num1 *= num2;
+  }
+  firstNum.innerHTML = num1;
+  secondNum.innerHTML = num2;
 }
 
-var calculateTwoNum = function() {
+var calculateTwoNum = function(answer) {
   var firstNum = document.getElementById("firstNum");
   var secondNum = document.getElementById("secondNum");
   var operator = document.getElementById("operator");
-  var answer = Number(document.getElementById("answer").value);
+
   switch (operator.innerHTML) {
     case '+':
       return (Number(firstNum.innerHTML) + Number(secondNum.innerHTML) === answer);
@@ -39,7 +48,7 @@ var calculateTwoNum = function() {
       return (Number(firstNum.innerHTML) * Number(secondNum.innerHTML) === answer);
       break;
     default:
-      return (Math.round(Number(firstNum.innerHTML) / Number(secondNum.innerHTML)*10) / 10 === answer);
+      return (Number(firstNum.innerHTML) / Number(secondNum.innerHTML) === answer);
   }
 }
 
@@ -55,10 +64,6 @@ $(document).ready(function(){
     event.stopPropagation();
     var limiteNum = document.getElementById("numLimite")
     limiteNum.innerHTML = this.value;
-
-    /*var x = this.value;
-    var color = 'linear-gradient(90deg, rgb(76, 209, 55)' + x + '%, rgb(39, 60, 117)' + x + '%)';
-    this.style.background = color;*/
   });
 
   $(document).on('click', 'li', function (event) {
@@ -67,44 +72,49 @@ $(document).ready(function(){
     } else {
       operatorList.push($(this).data('id'));
     }
+    assignNumber();
   });
 
-  var count = 10;
+  var count;
   var timer;
   var start = false;
   var score = 0;
+  var timeout;
+  var answer;
+
+  var startTimer = function () {
+    timer = setInterval(function () {
+      document.getElementById("timeLeft").innerHTML = Number(document.getElementById("timeLeft").innerHTML) - 1;
+      if (Number(document.getElementById("timeLeft").innerHTML) < 0) {
+        clearInterval(timer);
+        timeLeft.innerHTML = 10;
+        start = false;
+        document.getElementById("answer").value = '';
+        setHighScore();
+        score = 0;
+      }
+    }, 1000);
+  }
 
   $(document).on('input', '#answer', function (event) {
     if (start === false) {
+      document.getElementById("currentScore").innerHTML = '';
       start = true;
-      document.getElementById("currentScore").innerHTML = 0;
-      var timeLeft = document.getElementById("timeLeft");
-      var timer = setInterval(function () {
-        if(calculateTwoNum()) {
-          if (count < 10) {
-            count += 1;
-          }
-
-          score = Number(document.getElementById("currentScore").innerHTML);
-          document.getElementById("currentScore").innerHTML = score + 1;
-          document.getElementById("answer").value = '';
-          assignNumber();
-        } else {
-          count -= 1;
-        } // End of if calculateTwoNum
-      // ********** To stop Time interval ********
-        if (count < 0) {
-          clearInterval(timer);
-          count = 10;
-          start = false;
-          document.getElementById("answer").value = '';
-          setHighScore();
-          score = 0;
-        }
-
-        timeLeft.innerHTML = count;
-      }, 1000);
-    } //End of if start === false
+      startTimer();
+    }
+    var timeLeft = document.getElementById("timeLeft");
+    count = Number(timeLeft.innerHTML);
+    clearTimeout(timeout);
+    timeout = setTimeout(function () {
+      answer = Number(document.getElementById("answer").value);
+      if(calculateTwoNum(answer)) {
+        timeLeft.innerHTML = count + 1;
+        score = Number(document.getElementById("currentScore").innerHTML);
+        document.getElementById("currentScore").innerHTML = score + 1;
+        document.getElementById("answer").value = '';
+        assignNumber();
+      }
+    }, 300);
   });
 
   assignNumber();
