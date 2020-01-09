@@ -16,8 +16,11 @@ var assignNumber = function () {
   var operator = document.getElementById("operator");
 
   firstNum.innerHTML = num1;
-  operator.innerHTML = operatorList[operatorIndex - 1];
   secondNum.innerHTML = num2;
+  if (operatorList.length !== 0) {
+    operator.innerHTML = operatorList[operatorIndex - 1];
+  }
+
 }
 
 var calculateTwoNum = function() {
@@ -52,6 +55,10 @@ $(document).ready(function(){
     event.stopPropagation();
     var limiteNum = document.getElementById("numLimite")
     limiteNum.innerHTML = this.value;
+
+    /*var x = this.value;
+    var color = 'linear-gradient(90deg, rgb(76, 209, 55)' + x + '%, rgb(39, 60, 117)' + x + '%)';
+    this.style.background = color;*/
   });
 
   $(document).on('click', 'li', function (event) {
